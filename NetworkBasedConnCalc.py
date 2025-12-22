@@ -82,7 +82,9 @@ specs = {
     'CorrCalcFunct': CV.NetBaseConnCalc['CorrCalcFunct'],
     'AmpBand': CV.NetBaseConnCalc['AmpBand'],
     'PhaseBand': CV.NetBaseConnCalc['PhaseBand'],
-
+    'Spectral_Res': CV.NetBaseConnCalc['Spectral_Res'],
+    
+    'DyCommogram': CV.NetBaseConnCalc['DyCommogram'],
     'SingleTrial': CV.NetBaseConnCalc['SingleTrial'],
 }
 
@@ -90,10 +92,15 @@ for event in event_numbers:
 
     event_name = Constants.LocalDataConstants.names['events'][event]
 
-    if event_name == 'Actions':
+    if event_name == 'Actions' or event_name == 'TestActions':
 
         sp = int((st + 1) * Fs)
         fp = int((ft + 1) * Fs)
+
+    elif event_name == 'TestStim':
+
+        sp = int((st + 0.6) * Fs)
+        fp = int((ft + 0.6) * Fs)
 
     else:
 
