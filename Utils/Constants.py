@@ -8,7 +8,7 @@ class DC_Constants():
 
             'directed': False,
             'lagged': False,
-            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma'],
+            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma', 'All-D', 'LowF-D'],
             'SelfLoop': False,
         },
 
@@ -16,7 +16,7 @@ class DC_Constants():
 
             'directed': False,
             'lagged': False,
-            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma'],
+            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma', 'All-D', 'LowF-D'],
             'SelfLoop': False,
         },
 
@@ -24,7 +24,7 @@ class DC_Constants():
 
             'directed': True,
             'lagged': False,
-            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma'],
+            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma', 'All-D', 'LowF-D'],
             'SelfLoop': False,
         },
 
@@ -32,7 +32,7 @@ class DC_Constants():
 
             'directed': False,
             'lagged': False,
-            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma'],
+            'AvailableBands': ['All', 'Delta', 'Theta', 'Alpha', 'Beta', 'Gamma', 'All-D', 'LowF-D'],
             'SelfLoop': False,
         },
 
@@ -161,6 +161,7 @@ class LocalDataConstants():
 
         'beh_dir_file': r'E:\HWs\Msc\Research\Research\Depression Dataset\depression_rl_eeg\Depression PS Task\Scripts from Manuscript\Data_4_Import.xlsx',
         'perform_data_dir': r'E:\HWs\Msc\Research\Research\Depression Dataset\New Datasets\Subjects_Behavioral_datas.csv',
+        'test_phase_perform_data_dir': r'E:\HWs\Msc\Research\Research\Depression Dataset\New Datasets\Subjects_Behavioral_datas_test.csv',
         'eeg_prep_datasets_dir': r'E:\\HWs\Msc\\Research\\Research\\Depression Dataset\\Testing Preprocess',
         'confile_dir': r'D:\AIRLab_Research\Data\ConnectivityDataDict.pickle',
         'n_confile_dir': r'D:\AIRLab_Research\Data',
@@ -270,6 +271,7 @@ class SpectralConstants():
         'Delta': [0.5, 4],
         'Theta': [4, 8],
         'Alpha': [8, 12],
+        'LowF': [4, 12],
         'Beta': [12, 30],
         'Gamma': [30, 50],
         'LowBeta': [12, 20],
@@ -301,6 +303,7 @@ class SpectralConstants():
                     'LowGamma': [11, 14],
                     'MidGamma': [9.2, 11],
                     'HighGamma': [8, 9.2],
+                    'LowF': [32, 128]
                 },
             },
 
@@ -319,6 +322,7 @@ class SpectralConstants():
                     'LowGamma': [11, 14],
                     'MidGamma': [9.2, 11],
                     'HighGamma': [8, 9.2],
+                    'LowF': [32, 128]
                 },
             }
 
@@ -344,4 +348,25 @@ class StaConstants():
 
         'Availables': ['NormalPDF']
 
+    }
+
+class BehavioralConsts():
+
+    TestStimLabels = {
+
+        '0': [0.8, 0.2],
+        '1': [0.8, 0.7],
+        '2': [0.8, 0.3],
+        '3': [0.8, 0.6],
+        '4': [0.8, 0.4],
+        '5': [0.7, 0.2],
+        '6': [0.3, 0.2],
+        '7': [0.6, 0.2],
+        '8': [0.4, 0.2],
+        '9': [0.7, 0.3],
+        '10': [0.7, 0.6],
+        '11': [0.7, 0.4],
+        '12': [0.6, 0.3],
+        '13': [0.4, 0.3],
+        '14': [0.6, 0.4],
     }
