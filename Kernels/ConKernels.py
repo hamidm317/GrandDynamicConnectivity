@@ -126,6 +126,8 @@ def TE(x, y, specs):
 
 def dPLI(x, y, specs):
 
+    return_DC = False
+
     if 'Band' in specs.keys():
 
         Band = specs['Band']
@@ -141,15 +143,39 @@ def dPLI(x, y, specs):
 
     else:
 
-        x_b = WSD(x, Band = Band)[0]
-        y_b = WSD(y, Band = Band)[0]
+        if Band == 'All-D':
+
+            return_DC = True
+            Band = 'All'
+
+            x_b = WSD(x, Band = Band, Spectral_Res = specs['Spectral_Res'])[0]
+            y_b = WSD(y, Band = Band, Spectral_Res = specs['Spectral_Res'])[0]
+
+        elif Band == 'LowF-D':
+
+            return_DC = True
+            Band = 'LowF'
+
+            x_b = WSD(x, Band = Band, Spectral_Res = specs['Spectral_Res'])[0]
+            y_b = WSD(y, Band = Band, Spectral_Res = specs['Spectral_Res'])[0]
+
+        else:
+
+            x_b = WSD(x, Band = Band)[0]
+            y_b = WSD(y, Band = Band)[0]
 
     x_a = signal.hilbert(x_b)
     y_a = signal.hilbert(y_b)
     
     phase_HSs = np.heaviside(np.angle(x_a) - np.angle(y_a), 0.5)
     
-    return np.mean(phase_HSs)
+    if return_DC:
+
+        return phase_HSs
+    
+    else:
+
+        return np.mean(phase_HSs)
 
 def wPLI(x, y, specs, eta = 0.00000001):
 
@@ -224,7 +250,7 @@ def PCor(x, y, specs):
 
     else:
 
-        Domain = 'P2P'
+        Domain = 'A2A'
 
     if 'Band' in specs.keys():
 
