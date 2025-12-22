@@ -18,7 +18,9 @@ def DynamicConnectivityMeasure(Data: np.ndarray, window_length = 100, overlap_ra
         'SpecDecompKernel': 'Wavelet',
         'PhaseAmplitudeCorrelateCalc': 'MeanVectorLength',
         'Band': 'All',
-        'PermuteBro': False
+        'PermuteBro': False,
+        'Spectral_Res': 20,
+        'DyCommogram': False
 
     }
 
@@ -59,6 +61,13 @@ def DynamicConnectivityMeasure(Data: np.ndarray, window_length = 100, overlap_ra
         specs['PhaseAmplitudeCorrelateCalc'] = options['PhaseAmplitudeCorrelateCalc']
         
         specs['Band'] = options['Band']
+
+        specs['Spectral_Res'] = options['Spectral_Res']
+        specs['DyCommogram'] = options['DyCommogram']
+
+        if specs['Band'] == 'All-D':
+
+            specs['DyCommogram'] = True
 
         assert Data.ndim == 2 or Data.ndim == 3, "Your Data must be 3 or 2 Dimensional, (Trials (optional), Channels, Time)"
 
@@ -112,7 +121,13 @@ def DynamicConnectivityMeasure(Data: np.ndarray, window_length = 100, overlap_ra
 
         specs['est_orders'] = orders_mat
 
-        DC_values = np.zeros((number_of_trials, number_of_windows, len(i_channels), len(j_channels)))
+        if specs['DyCommogram'] == True:
+
+            DC_values = np.zeros((number_of_trials, number_of_windows, specs['Spectral_Res'], len(i_channels), len(j_channels)))
+
+        else:
+
+            DC_values = np.zeros((number_of_trials, number_of_windows, len(i_channels), len(j_channels)))
 
         for trial_i in range(number_of_trials):
 
@@ -142,7 +157,13 @@ def DynamicConnectivityMeasure(Data: np.ndarray, window_length = 100, overlap_ra
 
                             win_DC_val = CoreKernelFunction(x_t, y_t, specs)
 
-                            DC_values[trial_i, win_step, i, j] = win_DC_val
+                            if specs['DyCommogram'] == True:
+
+                                DC_values[trial_i, win_step, :, i, j] = np.mean(win_DC_val, axis = 1)
+
+                            else:
+                            
+                                DC_values[trial_i, win_step, i, j] = win_DC_val
 
                     else:
 
@@ -166,8 +187,18 @@ def DynamicConnectivityMeasure(Data: np.ndarray, window_length = 100, overlap_ra
 
                             win_DC_val = CoreKernelFunction(x_t, y_t, specs)
 
-                            DC_values[trial_i, win_step, i, j] = win_DC_val
-                            DC_values[trial_i, win_step, j, i] = win_DC_val
+                            if specs['DyCommogram'] == True:
+
+                                DC_values[trial_i, win_step, :, i, j] = np.mean(win_DC_val, axis = 1)
+                                DC_values[trial_i, win_step, :, j, i] = np.mean(win_DC_val, axis = 1)
+
+                            else:
+                            
+                                DC_values[trial_i, win_step, i, j] = win_DC_val
+                                DC_values[trial_i, win_step, j, i] = win_DC_val
+
+                            # DC_values[trial_i, win_step, i, j] = win_DC_val
+                            # DC_values[trial_i, win_step, j, i] = win_DC_val
             
     return np.squeeze(DC_values)
 
