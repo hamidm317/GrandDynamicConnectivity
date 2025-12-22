@@ -19,10 +19,17 @@ def ClusteredEEGLoader(event, data_name = 'July'):
 
     return raw_data, data_lengths
 
-def ExperimentDataLoader():
+def ExperimentDataLoader(phase = 'Train'):
 
     BehavioralData = read_excel(LocalDataConstants.directories['beh_dir_file'])
-    Performance_data = read_csv(LocalDataConstants.directories['perform_data_dir'])
+
+    if phase == 'Train':
+
+        Performance_data = read_csv(LocalDataConstants.directories['perform_data_dir'])
+
+    elif phase == 'Test':
+    
+        Performance_data = read_csv(LocalDataConstants.directories['test_phase_perform_data_dir'])
 
     return BehavioralData, Performance_data
 
