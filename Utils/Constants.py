@@ -295,6 +295,7 @@ class SpectralConstants():
                     'All': [8, 1024],
                     'Delta': [128, 1024],
                     'Theta': [54, 128],
+                    'NomTheta': [51, 80],
                     'Alpha': [32, 54],
                     'Beta': [13, 32],
                     'Gamma': [8, 14],
@@ -304,6 +305,22 @@ class SpectralConstants():
                     'MidGamma': [9.2, 11],
                     'HighGamma': [8, 9.2],
                     'LowF': [32, 128]
+                },
+
+                '1000': {
+
+                    'All': [16, 2048],
+                    'Delta': [256, 2048],
+                    'Theta': [108, 256],
+                    'Alpha': [64, 108],
+                    'Beta': [26, 64],
+                    'Gamma': [16, 28],
+                    'LowBeta': [40, 64],
+                    'HighBeta': [24, 40],
+                    'LowGamma': [22, 28],
+                    'MidGamma': [18.4, 22],
+                    'HighGamma': [16, 18.4],
+                    'LowF': [64, 256]
                 },
             },
 
